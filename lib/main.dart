@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'core/app_routes.dart';
+import 'controllers/child_controller.dart';
 
 void main() {
-  runApp(const AlertasTempranasApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ChildController()..loadSampleData(),
+        ),
+      ],
+      child: const AlertasTempranasApp(),
+    ),
+  );
 }
 
 class AlertasTempranasApp extends StatelessWidget {
@@ -13,11 +24,9 @@ class AlertasTempranasApp extends StatelessWidget {
     return MaterialApp(
       title: 'Alertas Tempranas - CDI Los Clavelitos',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
-      initialRoute: '/',        // 👈 Aquí definimos la pantalla inicial
-      routes: AppRoutes.routes, // 👈 Esto llama al archivo app_routes.dart
+      theme: ThemeData(primarySwatch: Colors.green),
+      initialRoute: '/welcome',
+      routes: AppRoutes.routes,
     );
   }
 }
