@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'core/app_routes.dart';
+import 'widgets/app_routes.dart';
 import 'controllers/child_controller.dart';
 
 void main() {

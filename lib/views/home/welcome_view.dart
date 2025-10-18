@@ -1,7 +1,7 @@
-import 'package:alertas_tempranas/core/theme/app_buttons.dart';
-import 'package:alertas_tempranas/core/theme/app_colors.dart';
-import 'package:alertas_tempranas/core/theme/app_decorations.dart';
-import 'package:alertas_tempranas/core/theme/app_text_styles.dart';
+import 'package:alertas_tempranas/widgets/theme/app_buttons.dart';
+import 'package:alertas_tempranas/widgets/theme/app_colors.dart';
+import 'package:alertas_tempranas/widgets/theme/app_decorations.dart';
+import 'package:alertas_tempranas/widgets/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeView extends StatefulWidget {

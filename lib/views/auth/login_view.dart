@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:alertas_tempranas/core/theme/app_colors.dart';
-import 'package:alertas_tempranas/core/theme/app_text_styles.dart';
+import 'package:alertas_tempranas/widgets/theme/app_colors.dart';
+import 'package:alertas_tempranas/widgets/theme/app_text_styles.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:alertas_tempranas/core/theme/app_colors.dart';
-import 'package:alertas_tempranas/core/theme/app_text_styles.dart';
+import 'package:alertas_tempranas/widgets/theme/app_colors.dart';
+import 'package:alertas_tempranas/widgets/theme/app_text_styles.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
-    final _name = TextEditingController();
-    final _email = TextEditingController();
-    final _pass = TextEditingController();
+    final formKey = GlobalKey<FormState>();
+    final name = TextEditingController();
+    final email = TextEditingController();
+    final pass = TextEditingController();
 
     return Scaffold(
       body: Container(
@@ -65,12 +65,12 @@ class RegisterView extends StatelessWidget {
                     ],
                   ),
                   child: Form(
-                    key: _formKey,
+                    key: formKey,
                     child: Column(
                       children: [
                         // NOMBRE
                         TextFormField(
-                          controller: _name,
+                          controller: name,
                           decoration: const InputDecoration(
                             labelText: 'Nombre completo',
                             prefixIcon: Icon(
@@ -90,7 +90,7 @@ class RegisterView extends StatelessWidget {
 
                         // EMAIL
                         TextFormField(
-                          controller: _email,
+                          controller: email,
                           decoration: const InputDecoration(
                             labelText: 'Correo electrónico',
                             prefixIcon: Icon(
@@ -110,7 +110,7 @@ class RegisterView extends StatelessWidget {
 
                         // CONTRASEÑA
                         TextFormField(
-                          controller: _pass,
+                          controller: pass,
                           obscureText: true,
                           decoration: const InputDecoration(
                             labelText: 'Contraseña',
@@ -157,7 +157,7 @@ class RegisterView extends StatelessWidget {
                               ),
                             ),
                             onPressed: () {
-                              if (_formKey.currentState?.validate() == true) {
+                              if (formKey.currentState?.validate() == true) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                     content: Text('Usuario registrado (demo)'),

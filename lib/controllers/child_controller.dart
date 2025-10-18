@@ -92,7 +92,7 @@ class ChildController extends ChangeNotifier {
 
   String _generateId() {
     final r = Random().nextInt(1000000);
-    return DateTime.now().millisecondsSinceEpoch.toString() + "_$r";
+    return "${DateTime.now().millisecondsSinceEpoch}_$r";
   }
 
   // Método de inicialización demo
