@@ -9,7 +9,7 @@ class Child {
   final double perimetroBraquial;
   final double perimetroAbdominal;
   final int edad;
-  final String estadoNutricional; // saludable, sobrepeso, desnutricion
+  final String estadoNutricional; // Saludable, Sobrepeso, Desnutricion
   final bool activo;
 
   Child({

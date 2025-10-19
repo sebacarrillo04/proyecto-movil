@@ -82,12 +82,12 @@ class ChildController extends ChangeNotifier {
 
   // Clasificación simple (placeholder)
   String _classifyEstadoNutricional(double peso, double altura, int edad) {
-    if (altura <= 0) return 'indeterminado';
+    if (altura <= 0) return 'Indeterminado';
     final imc = peso / (altura * altura);
     // Reglas simplificadas (usar tablas OMS para rigidez)
-    if (imc < 14) return 'desnutricion';
-    if (imc >= 14 && imc < 18) return 'saludable';
-    return 'sobrepeso';
+    if (imc < 14) return 'Desnutricion';
+    if (imc >= 14 && imc < 18) return 'Saludable';
+    return 'Sobrepeso';
   }
 
   String _generateId() {
@@ -110,7 +110,7 @@ class ChildController extends ChangeNotifier {
         perimetroBraquial: 14.0,
         perimetroAbdominal: 50.0,
         edad: 2,
-        estadoNutricional: 'saludable',
+        estadoNutricional: 'Saludable',
         activo: true,
       ),
     );
@@ -126,7 +126,7 @@ class ChildController extends ChangeNotifier {
         perimetroBraquial: 12.5,
         perimetroAbdominal: 48.0,
         edad: 2,
-        estadoNutricional: 'desnutricion',
+        estadoNutricional: 'Desnutricion',
         activo: true,
       ),
     );

@@ -1,5 +1,7 @@
 import 'package:alertas_tempranas/controllers/child_controller.dart';
 import 'package:alertas_tempranas/models/child_model.dart';
+import 'package:alertas_tempranas/widgets/theme/app_colors.dart';
+import 'package:alertas_tempranas/widgets/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -56,9 +58,10 @@ class _AddChildViewState extends State<AddChildView> {
 
     Provider.of<ChildController>(context, listen: false).addChild(child);
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Niño agregado')));
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Niño registrado correctamente')),
+    );
+
     Navigator.pop(context);
   }
 
@@ -68,102 +71,187 @@ class _AddChildViewState extends State<AddChildView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Registrar niño')),
+      backgroundColor: AppColors.background,
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(12),
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Form(
-              key: _form,
-              child: Column(
+        child: Column(
+          children: [
+            // 🟦 ENCABEZADO
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.only(
+                top: 50,
+                bottom: 20,
+                left: 10,
+                right: 10,
+              ),
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [AppColors.primaryLight, AppColors.primary],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(25),
+                  bottomRight: Radius.circular(25),
+                ),
+              ),
+              child: Row(
                 children: [
-                  TextFormField(
-                    controller: _nombre,
-                    decoration: const InputDecoration(labelText: 'Nombre'),
-                    validator: _req,
-                  ),
-                  TextFormField(
-                    controller: _apellido,
-                    decoration: const InputDecoration(labelText: 'Apellido'),
-                    validator: _req,
-                  ),
-                  TextFormField(
-                    controller: _ident,
-                    decoration: const InputDecoration(
-                      labelText: 'Identificación',
+                  IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      color: Colors.white,
                     ),
                   ),
-                  TextFormField(
-                    controller: _padres,
-                    decoration: const InputDecoration(
-                      labelText: 'Nombre padres / acudiente',
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        'REGISTRAR NIÑO',
+                        style: AppTextStyles.titleLarge.copyWith(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          controller: _peso,
-                          decoration: const InputDecoration(
-                            labelText: 'Peso (kg)',
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: TextFormField(
-                          controller: _altura,
-                          decoration: const InputDecoration(
-                            labelText: 'Altura (m)',
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          controller: _perBraquial,
-                          decoration: const InputDecoration(
-                            labelText: 'Per. braquial (cm)',
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: TextFormField(
-                          controller: _perAbdominal,
-                          decoration: const InputDecoration(
-                            labelText: 'Per. abdominal (cm)',
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  TextFormField(
-                    controller: _edad,
-                    decoration: const InputDecoration(labelText: 'Edad (años)'),
-                    keyboardType: TextInputType.number,
-                  ),
-                  const SizedBox(height: 12),
-                  ElevatedButton(
-                    onPressed: _save,
-                    child: const Text('Guardar'),
-                  ),
+                  const SizedBox(width: 48),
                 ],
               ),
             ),
+
+            // 📋 FORMULARIO
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Form(
+                    key: _form,
+                    child: Column(
+                      children: [
+                        _input(_nombre, 'Nombre', Icons.person_outline),
+                        _input(_apellido, 'Apellido', Icons.person_outline),
+                        _input(_ident, 'Identificación', Icons.badge_outlined),
+                        _input(
+                          _padres,
+                          'Nombre padres / acudiente',
+                          Icons.family_restroom,
+                        ),
+
+                        Row(
+                          children: [
+                            Expanded(
+                              child: _input(
+                                _peso,
+                                'Peso (kg)',
+                                Icons.monitor_weight_outlined,
+                                number: true,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: _input(
+                                _altura,
+                                'Altura (m)',
+                                Icons.height,
+                                number: true,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Row(
+                          children: [
+                            Expanded(
+                              child: _input(
+                                _perBraquial,
+                                'Per. braquial (cm)',
+                                Icons.accessibility_new,
+                                number: true,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: _input(
+                                _perAbdominal,
+                                'Per. abdominal (cm)',
+                                Icons.accessibility,
+                                number: true,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        _input(
+                          _edad,
+                          'Edad (años)',
+                          Icons.cake_outlined,
+                          number: true,
+                        ),
+                        const SizedBox(height: 20),
+
+                        // 🟩 BOTÓN GUARDAR
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton.icon(
+                            icon: const Icon(Icons.save, color: Colors.white),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.primary,
+                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            label: const Text(
+                              'Guardar',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
+                            onPressed: _save,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _input(
+    TextEditingController c,
+    String label,
+    IconData icon, {
+    bool number = false,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: TextFormField(
+        controller: c,
+        decoration: InputDecoration(
+          labelText: label,
+          prefixIcon: Icon(icon, color: AppColors.primary),
+          filled: true,
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide.none,
           ),
         ),
+        validator: _req,
+        keyboardType: number ? TextInputType.number : TextInputType.text,
       ),
     );
   }
